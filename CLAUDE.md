@@ -27,7 +27,7 @@ A Python-based safety system where an LLM agent's actions are governed by an evo
 
 ### Code Style
 - LLM Calls: Always use Anthropic `tools` with `tool_choice` forced to get structured outputs. Never rely on prompt-only JSON.
-- Memory Threshold: Maintain a similarity threshold of 0.15 cosine distance (= 0.85 similarity) unless tuning results suggest otherwise.
+- Memory Threshold: Maintain a similarity threshold of 0.20 cosine distance (= 0.80 similarity) unless tuning results suggest otherwise.
 - Logging: Every decision must be logged with its source (guardrail vs. memory) and full explainability trace.
 - Error Handling: Wrap Anthropic API calls in try/except blocks.
 

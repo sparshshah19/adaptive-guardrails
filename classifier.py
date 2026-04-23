@@ -12,9 +12,9 @@
 #   BCELoss (binary cross-entropy) is the standard loss for this setup.
 #
 # Decision thresholds (from config.py):
-#   prob > NN_BLOCK_THRESHOLD (0.98) → BLOCK locally
-#   prob < NN_ALLOW_THRESHOLD (0.02) → ALLOW locally
-#   0.02–0.98                        → uncertain → fall through to Claude
+#   prob > NN_BLOCK_THRESHOLD (0.85) → BLOCK locally
+#   prob < NN_ALLOW_THRESHOLD (0.15) → ALLOW locally
+#   0.15–0.85                        → uncertain → fall through to Claude
 #
 # Singleton pattern:
 #   classifier.py exposes a module-level `risk_classifier` instance.

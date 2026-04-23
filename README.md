@@ -1,5 +1,10 @@
 # Adaptive Guardrails
 
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Tests](https://img.shields.io/badge/tests-56%20passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-green)
+![CI](https://github.com/sparshshah19/retrievalbasedlearning-safetylayer-agents/actions/workflows/test.yml/badge.svg)
+
 A memory-augmented, teacher-student safety pipeline for AI agents. Evaluates proposed agent actions through a 3-stage decision pipeline — semantic memory retrieval, a locally-trained neural classifier, and an LLM fallback — achieving F1=0.983 while reducing decision latency by 155x for repeated threats.
 
 ---
@@ -57,6 +62,12 @@ Precision=0.9753 | Recall=0.9858 | **F1=0.9806**
 **Key finding — bash variant blind spot:**
 All 5 tested bash-form attacks exceeded the semantic memory detection threshold (avg distance=0.91) despite their natural-language equivalents scoring well below it (avg distance=0.75). Code-form text occupies a distinct region of the embedding space.
 
+> **Note on API call counts:** The benchmark above is a cold-start evaluation — memory is empty and the NN has no prior context, so every action falls through to Claude. The 80% API reduction is a steady-state benefit: once blocked patterns are stored in memory and the NN is trained, repeated and variant attacks are caught locally without an API call. See Key Findings for the efficiency analysis.
+
+![Precision-Recall Curve](figures/precision_recall.png)
+
+![Embedding Space (t-SNE)](figures/tsne_embeddings.png)
+
 ---
 
 ## Architecture
@@ -100,7 +111,7 @@ adaptive-guardrails/
 ## Setup
 
 ```bash
-git clone https://github.com/sparshshah/retrievalbasedlearning-safetylayer-agents
+git clone https://github.com/sparshshah19/retrievalbasedlearning-safetylayer-agents
 cd retrievalbasedlearning-safetylayer-agents
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
