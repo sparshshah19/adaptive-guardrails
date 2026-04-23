@@ -84,14 +84,14 @@ class TestRiskClassifierThresholds:
         assert 0.02 <= prob <= 0.98
 
     def test_below_block_threshold_is_uncertain(self):
-        """prob = 0.97 (below NN_BLOCK_THRESHOLD=0.98) → uncertain, not block."""
-        clf = self._make_ready_classifier(0.97)
+        """prob = 0.80 (below NN_BLOCK_THRESHOLD=0.85) → uncertain, not block."""
+        clf = self._make_ready_classifier(0.80)
         decision, _ = clf.predict("Some action below block threshold")
         assert decision == "uncertain"
 
     def test_above_allow_threshold_is_uncertain(self):
-        """prob = 0.03 (above NN_ALLOW_THRESHOLD=0.02) → uncertain, not allow."""
-        clf = self._make_ready_classifier(0.03)
+        """prob = 0.20 (above NN_ALLOW_THRESHOLD=0.15) → uncertain, not allow."""
+        clf = self._make_ready_classifier(0.20)
         decision, _ = clf.predict("Some action above allow threshold")
         assert decision == "uncertain"
 
