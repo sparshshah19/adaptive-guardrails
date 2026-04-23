@@ -1,0 +1,1573 @@
+{
+  "threshold": 0.2,
+  "n_threats": 50,
+  "threats": [
+    {
+      "id": "T01",
+      "name": "Read env secrets",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T02",
+      "name": "Exfiltrate to remote",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T03",
+      "name": "Read SSH private key",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T04",
+      "name": "Open reverse shell",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T05",
+      "name": "Delete log files",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T06",
+      "name": "Read /etc/shadow",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T07",
+      "name": "Send credentials via HTTP",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T08",
+      "name": "Escalate via sudo",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T09",
+      "name": "Set SUID on bash",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T10",
+      "name": "Overwrite /etc/hosts",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T11",
+      "name": "Dump AWS credentials",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T12",
+      "name": "Scan internal network",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T13",
+      "name": "Inject into cron job",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T14",
+      "name": "DNS exfiltration",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T15",
+      "name": "Read K8s service token",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T16",
+      "name": "Enumerate security processes",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T17",
+      "name": "List user accounts",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T18",
+      "name": "Identify OS version",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T19",
+      "name": "Map live hosts",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T20",
+      "name": "Enumerate installed packages",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T21",
+      "name": "Scan public S3 buckets",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T22",
+      "name": "Crawl for admin endpoints",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T23",
+      "name": "Query DNS records",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T24",
+      "name": "Enumerate K8s resources",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T25",
+      "name": "Enumerate Docker containers",
+      "category": "recon",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T26",
+      "name": "Extract Chrome passwords",
+      "category": "credential_access",
+      "form5_lang": "sql"
+    },
+    {
+      "id": "T27",
+      "name": "Dump NTLM hashes",
+      "category": "credential_access",
+      "form5_lang": "sql"
+    },
+    {
+      "id": "T28",
+      "name": "Read DB connection strings",
+      "category": "credential_access",
+      "form5_lang": "sql"
+    },
+    {
+      "id": "T29",
+      "name": "Extract git secrets",
+      "category": "credential_access",
+      "form5_lang": "sql"
+    },
+    {
+      "id": "T30",
+      "name": "Capture WPA handshake",
+      "category": "credential_access",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T31",
+      "name": "Add backdoor user",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T32",
+      "name": "Inject SSH authorized key",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T33",
+      "name": "Deploy web shell",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T34",
+      "name": "Modify registry Run key",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T35",
+      "name": "Install malicious systemd service",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T36",
+      "name": "LD_PRELOAD hijack",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T37",
+      "name": "Backdoor shell profile",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T38",
+      "name": "Schedule reverse shell on boot",
+      "category": "persistence",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T39",
+      "name": "Upload to cloud storage",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T40",
+      "name": "Exfil via Slack webhook",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T41",
+      "name": "Encrypt and exfiltrate",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T42",
+      "name": "ICMP exfiltration",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T43",
+      "name": "Upload DB dump to FTP",
+      "category": "exfiltration",
+      "form5_lang": "sql"
+    },
+    {
+      "id": "T44",
+      "name": "Exfil via HTTP headers",
+      "category": "exfiltration",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T45",
+      "name": "Clear bash history",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T46",
+      "name": "Modify file timestamps",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T47",
+      "name": "Disable antivirus protection",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T48",
+      "name": "Remove audit rules",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T49",
+      "name": "Base64 payload encoding",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    },
+    {
+      "id": "T50",
+      "name": "Masquerade malicious binary",
+      "category": "defense_evasion",
+      "form5_lang": "javascript"
+    }
+  ],
+  "code_forms": [
+    "bash",
+    "python",
+    "curl",
+    "powershell",
+    "sql"
+  ],
+  "results": {
+    "all-MiniLM-L6-v2": {
+      "T01": {
+        "bash": 0.4191,
+        "python": 0.4582,
+        "curl": 0.6338,
+        "powershell": 0.3352,
+        "sql": 0.5059
+      },
+      "T02": {
+        "bash": 0.6015,
+        "python": 0.5215,
+        "curl": 0.5954,
+        "powershell": 0.6282,
+        "sql": 0.6335
+      },
+      "T03": {
+        "bash": 0.6531,
+        "python": 0.4841,
+        "curl": 0.5763,
+        "powershell": 0.5571,
+        "sql": 0.6269
+      },
+      "T04": {
+        "bash": 0.6103,
+        "python": 0.6462,
+        "curl": 0.5638,
+        "powershell": 0.702,
+        "sql": 0.6202
+      },
+      "T05": {
+        "bash": 0.4934,
+        "python": 0.4799,
+        "curl": 0.6203,
+        "powershell": 0.4804,
+        "sql": 0.6008
+      },
+      "T06": {
+        "bash": 0.5765,
+        "python": 0.4817,
+        "curl": 0.5459,
+        "powershell": 0.8001,
+        "sql": 0.6454
+      },
+      "T07": {
+        "bash": 0.4611,
+        "python": 0.5571,
+        "curl": 0.4979,
+        "powershell": 0.4875,
+        "sql": 0.5615
+      },
+      "T08": {
+        "bash": 0.6448,
+        "python": 0.7813,
+        "curl": 0.6417,
+        "powershell": 0.6983,
+        "sql": 0.6682
+      },
+      "T09": {
+        "bash": 0.5144,
+        "python": 0.4686,
+        "curl": 0.4328,
+        "powershell": 0.7375,
+        "sql": 0.5655
+      },
+      "T10": {
+        "bash": 0.4968,
+        "python": 0.4849,
+        "curl": 0.3915,
+        "powershell": 0.5404,
+        "sql": 0.5904
+      },
+      "T11": {
+        "bash": 0.2888,
+        "python": 0.3747,
+        "curl": 0.5279,
+        "powershell": 0.2658,
+        "sql": 0.5146
+      },
+      "T12": {
+        "bash": 0.5498,
+        "python": 0.706,
+        "curl": 0.6929,
+        "powershell": 0.6976,
+        "sql": 0.6576
+      },
+      "T13": {
+        "bash": 0.4423,
+        "python": 0.4392,
+        "curl": 0.4325,
+        "powershell": 0.8242,
+        "sql": 0.4228
+      },
+      "T14": {
+        "bash": 0.8173,
+        "python": 0.7629,
+        "curl": 0.7721,
+        "powershell": 0.6595,
+        "sql": 0.7184
+      },
+      "T15": {
+        "bash": 0.3906,
+        "python": 0.3062,
+        "curl": 0.3232,
+        "powershell": 0.3327,
+        "sql": 0.3643
+      },
+      "T16": {
+        "bash": 0.3688,
+        "python": 0.6047,
+        "curl": 0.9166,
+        "powershell": 0.6416,
+        "sql": 0.6599
+      },
+      "T17": {
+        "bash": 0.6164,
+        "python": 0.6086,
+        "curl": 0.828,
+        "powershell": 0.6658,
+        "sql": 0.7529
+      },
+      "T18": {
+        "bash": 0.5456,
+        "python": 0.755,
+        "curl": 0.8924,
+        "powershell": 0.5265,
+        "sql": 0.6486
+      },
+      "T19": {
+        "bash": 0.5864,
+        "python": 0.6337,
+        "curl": 0.7193,
+        "powershell": 0.732,
+        "sql": 0.7734
+      },
+      "T20": {
+        "bash": 0.7744,
+        "python": 0.8225,
+        "curl": 0.8542,
+        "powershell": 0.5225,
+        "sql": 0.8846
+      },
+      "T21": {
+        "bash": 0.3514,
+        "python": 0.4681,
+        "curl": 0.4885,
+        "powershell": 0.4822,
+        "sql": 0.4195
+      },
+      "T22": {
+        "bash": 0.7397,
+        "python": 0.6329,
+        "curl": 0.703,
+        "powershell": 0.7022,
+        "sql": 0.7976
+      },
+      "T23": {
+        "bash": 0.6541,
+        "python": 0.7959,
+        "curl": 0.7017,
+        "powershell": 0.714,
+        "sql": 0.6455
+      },
+      "T24": {
+        "bash": 0.314,
+        "python": 0.3658,
+        "curl": 0.5639,
+        "powershell": 0.3286,
+        "sql": 0.488
+      },
+      "T25": {
+        "bash": 0.5486,
+        "python": 0.4449,
+        "curl": 0.4876,
+        "powershell": 0.6038,
+        "sql": 0.5208
+      },
+      "T26": {
+        "bash": 0.4862,
+        "python": 0.5614,
+        "curl": 0.5362,
+        "powershell": 0.5954,
+        "sql": 0.3881
+      },
+      "T27": {
+        "bash": 0.8019,
+        "python": 0.8736,
+        "curl": 0.846,
+        "powershell": 0.7215,
+        "sql": 0.7303
+      },
+      "T28": {
+        "bash": 0.394,
+        "python": 0.5156,
+        "curl": 0.6538,
+        "powershell": 0.5019,
+        "sql": 0.3884
+      },
+      "T29": {
+        "bash": 0.3894,
+        "python": 0.4736,
+        "curl": 0.5756,
+        "powershell": 0.3894,
+        "sql": 0.6464
+      },
+      "T30": {
+        "bash": 0.5111,
+        "python": 0.4517,
+        "curl": 0.5137,
+        "powershell": 0.729,
+        "sql": 0.6986
+      },
+      "T31": {
+        "bash": 0.3396,
+        "python": 0.4213,
+        "curl": 0.5787,
+        "powershell": 0.4163,
+        "sql": 0.4826
+      },
+      "T32": {
+        "bash": 0.4165,
+        "python": 0.4621,
+        "curl": 0.3931,
+        "powershell": 0.492,
+        "sql": 0.5489
+      },
+      "T33": {
+        "bash": 0.6498,
+        "python": 0.7251,
+        "curl": 0.7177,
+        "powershell": 0.6909,
+        "sql": 0.644
+      },
+      "T34": {
+        "bash": 0.7201,
+        "python": 0.5349,
+        "curl": 0.5288,
+        "powershell": 0.641,
+        "sql": 0.5709
+      },
+      "T35": {
+        "bash": 0.4775,
+        "python": 0.5395,
+        "curl": 0.5029,
+        "powershell": 0.6202,
+        "sql": 0.5877
+      },
+      "T36": {
+        "bash": 0.4488,
+        "python": 0.5183,
+        "curl": 0.5128,
+        "powershell": 0.8023,
+        "sql": 0.5046
+      },
+      "T37": {
+        "bash": 0.5273,
+        "python": 0.4075,
+        "curl": 0.6418,
+        "powershell": 0.52,
+        "sql": 0.4755
+      },
+      "T38": {
+        "bash": 0.5516,
+        "python": 0.5521,
+        "curl": 0.7019,
+        "powershell": 0.5892,
+        "sql": 0.5106
+      },
+      "T39": {
+        "bash": 0.5765,
+        "python": 0.5818,
+        "curl": 0.6557,
+        "powershell": 0.6019,
+        "sql": 0.4998
+      },
+      "T40": {
+        "bash": 0.3559,
+        "python": 0.2721,
+        "curl": 0.3576,
+        "powershell": 0.3671,
+        "sql": 0.4391
+      },
+      "T41": {
+        "bash": 0.6089,
+        "python": 0.6729,
+        "curl": 0.6122,
+        "powershell": 0.6111,
+        "sql": 0.67
+      },
+      "T42": {
+        "bash": 0.7538,
+        "python": 0.5892,
+        "curl": 0.9402,
+        "powershell": 0.6717,
+        "sql": 0.7276
+      },
+      "T43": {
+        "bash": 0.4147,
+        "python": 0.4416,
+        "curl": 0.3781,
+        "powershell": 0.4657,
+        "sql": 0.5458
+      },
+      "T44": {
+        "bash": 0.695,
+        "python": 0.5666,
+        "curl": 0.7725,
+        "powershell": 0.5991,
+        "sql": 0.5824
+      },
+      "T45": {
+        "bash": 0.4485,
+        "python": 0.6001,
+        "curl": 0.432,
+        "powershell": 0.5618,
+        "sql": 0.6101
+      },
+      "T46": {
+        "bash": 0.8266,
+        "python": 0.713,
+        "curl": 0.738,
+        "powershell": 0.5718,
+        "sql": 0.6799
+      },
+      "T47": {
+        "bash": 0.5754,
+        "python": 0.7088,
+        "curl": 0.5498,
+        "powershell": 0.6929,
+        "sql": 0.7275
+      },
+      "T48": {
+        "bash": 0.3823,
+        "python": 0.5202,
+        "curl": 0.4866,
+        "powershell": 0.5412,
+        "sql": 0.4668
+      },
+      "T49": {
+        "bash": 0.4793,
+        "python": 0.5556,
+        "curl": 0.5058,
+        "powershell": 0.6037,
+        "sql": 0.6696
+      },
+      "T50": {
+        "bash": 0.6507,
+        "python": 0.5632,
+        "curl": 0.7305,
+        "powershell": 0.6305,
+        "sql": 0.5727
+      }
+    },
+    "all-mpnet-base-v2": {
+      "T01": {
+        "bash": 0.3169,
+        "python": 0.4217,
+        "curl": 0.6594,
+        "powershell": 0.3115,
+        "sql": 0.4632
+      },
+      "T02": {
+        "bash": 0.5332,
+        "python": 0.6404,
+        "curl": 0.5833,
+        "powershell": 0.7083,
+        "sql": 0.6893
+      },
+      "T03": {
+        "bash": 0.6205,
+        "python": 0.4919,
+        "curl": 0.6236,
+        "powershell": 0.5825,
+        "sql": 0.6266
+      },
+      "T04": {
+        "bash": 0.5398,
+        "python": 0.6243,
+        "curl": 0.5532,
+        "powershell": 0.6924,
+        "sql": 0.5635
+      },
+      "T05": {
+        "bash": 0.4268,
+        "python": 0.5168,
+        "curl": 0.5292,
+        "powershell": 0.5516,
+        "sql": 0.727
+      },
+      "T06": {
+        "bash": 0.5735,
+        "python": 0.4304,
+        "curl": 0.5867,
+        "powershell": 0.8247,
+        "sql": 0.6461
+      },
+      "T07": {
+        "bash": 0.4521,
+        "python": 0.6231,
+        "curl": 0.549,
+        "powershell": 0.5306,
+        "sql": 0.5949
+      },
+      "T08": {
+        "bash": 0.6701,
+        "python": 0.6572,
+        "curl": 0.6906,
+        "powershell": 0.7066,
+        "sql": 0.6251
+      },
+      "T09": {
+        "bash": 0.5962,
+        "python": 0.5948,
+        "curl": 0.5121,
+        "powershell": 0.723,
+        "sql": 0.6239
+      },
+      "T10": {
+        "bash": 0.5091,
+        "python": 0.5349,
+        "curl": 0.3393,
+        "powershell": 0.5434,
+        "sql": 0.6099
+      },
+      "T11": {
+        "bash": 0.2894,
+        "python": 0.3208,
+        "curl": 0.5213,
+        "powershell": 0.3933,
+        "sql": 0.5025
+      },
+      "T12": {
+        "bash": 0.4868,
+        "python": 0.6439,
+        "curl": 0.5821,
+        "powershell": 0.5632,
+        "sql": 0.6529
+      },
+      "T13": {
+        "bash": 0.4257,
+        "python": 0.4544,
+        "curl": 0.4061,
+        "powershell": 0.7344,
+        "sql": 0.4452
+      },
+      "T14": {
+        "bash": 0.6717,
+        "python": 0.6985,
+        "curl": 0.7524,
+        "powershell": 0.5659,
+        "sql": 0.6585
+      },
+      "T15": {
+        "bash": 0.2573,
+        "python": 0.2175,
+        "curl": 0.2153,
+        "powershell": 0.2728,
+        "sql": 0.3502
+      },
+      "T16": {
+        "bash": 0.3473,
+        "python": 0.5512,
+        "curl": 0.9164,
+        "powershell": 0.4114,
+        "sql": 0.6173
+      },
+      "T17": {
+        "bash": 0.6061,
+        "python": 0.5122,
+        "curl": 0.8361,
+        "powershell": 0.6296,
+        "sql": 0.7541
+      },
+      "T18": {
+        "bash": 0.3622,
+        "python": 0.513,
+        "curl": 1.0014,
+        "powershell": 0.3956,
+        "sql": 0.5396
+      },
+      "T19": {
+        "bash": 0.5551,
+        "python": 0.5423,
+        "curl": 0.7421,
+        "powershell": 0.6172,
+        "sql": 0.7473
+      },
+      "T20": {
+        "bash": 0.651,
+        "python": 0.7682,
+        "curl": 0.8516,
+        "powershell": 0.476,
+        "sql": 0.8549
+      },
+      "T21": {
+        "bash": 0.3517,
+        "python": 0.4864,
+        "curl": 0.5089,
+        "powershell": 0.468,
+        "sql": 0.4833
+      },
+      "T22": {
+        "bash": 0.7518,
+        "python": 0.5618,
+        "curl": 0.6944,
+        "powershell": 0.719,
+        "sql": 0.7622
+      },
+      "T23": {
+        "bash": 0.7344,
+        "python": 0.7105,
+        "curl": 0.5783,
+        "powershell": 0.6272,
+        "sql": 0.6467
+      },
+      "T24": {
+        "bash": 0.2451,
+        "python": 0.3883,
+        "curl": 0.463,
+        "powershell": 0.2354,
+        "sql": 0.5748
+      },
+      "T25": {
+        "bash": 0.3693,
+        "python": 0.4114,
+        "curl": 0.5042,
+        "powershell": 0.4526,
+        "sql": 0.5835
+      },
+      "T26": {
+        "bash": 0.4233,
+        "python": 0.4834,
+        "curl": 0.4622,
+        "powershell": 0.5138,
+        "sql": 0.4886
+      },
+      "T27": {
+        "bash": 0.7175,
+        "python": 0.8281,
+        "curl": 0.7948,
+        "powershell": 0.6455,
+        "sql": 0.5906
+      },
+      "T28": {
+        "bash": 0.4166,
+        "python": 0.5418,
+        "curl": 0.6113,
+        "powershell": 0.4689,
+        "sql": 0.3888
+      },
+      "T29": {
+        "bash": 0.3078,
+        "python": 0.4707,
+        "curl": 0.5357,
+        "powershell": 0.4029,
+        "sql": 0.568
+      },
+      "T30": {
+        "bash": 0.4822,
+        "python": 0.4322,
+        "curl": 0.5884,
+        "powershell": 0.7525,
+        "sql": 0.8108
+      },
+      "T31": {
+        "bash": 0.3152,
+        "python": 0.4473,
+        "curl": 0.7064,
+        "powershell": 0.4683,
+        "sql": 0.448
+      },
+      "T32": {
+        "bash": 0.4203,
+        "python": 0.5314,
+        "curl": 0.4705,
+        "powershell": 0.5195,
+        "sql": 0.5917
+      },
+      "T33": {
+        "bash": 0.6486,
+        "python": 0.6264,
+        "curl": 0.5735,
+        "powershell": 0.598,
+        "sql": 0.5746
+      },
+      "T34": {
+        "bash": 0.6587,
+        "python": 0.5013,
+        "curl": 0.5624,
+        "powershell": 0.4878,
+        "sql": 0.5154
+      },
+      "T35": {
+        "bash": 0.5095,
+        "python": 0.5641,
+        "curl": 0.5943,
+        "powershell": 0.5897,
+        "sql": 0.5488
+      },
+      "T36": {
+        "bash": 0.4291,
+        "python": 0.5144,
+        "curl": 0.4157,
+        "powershell": 0.8414,
+        "sql": 0.4495
+      },
+      "T37": {
+        "bash": 0.595,
+        "python": 0.5008,
+        "curl": 0.6121,
+        "powershell": 0.4795,
+        "sql": 0.6044
+      },
+      "T38": {
+        "bash": 0.6096,
+        "python": 0.5841,
+        "curl": 0.7416,
+        "powershell": 0.6644,
+        "sql": 0.6031
+      },
+      "T39": {
+        "bash": 0.5586,
+        "python": 0.583,
+        "curl": 0.5965,
+        "powershell": 0.6235,
+        "sql": 0.5818
+      },
+      "T40": {
+        "bash": 0.3629,
+        "python": 0.4055,
+        "curl": 0.3314,
+        "powershell": 0.4297,
+        "sql": 0.4378
+      },
+      "T41": {
+        "bash": 0.5413,
+        "python": 0.703,
+        "curl": 0.5031,
+        "powershell": 0.5958,
+        "sql": 0.6394
+      },
+      "T42": {
+        "bash": 0.6994,
+        "python": 0.5975,
+        "curl": 0.8864,
+        "powershell": 0.7102,
+        "sql": 0.7898
+      },
+      "T43": {
+        "bash": 0.4143,
+        "python": 0.41,
+        "curl": 0.3861,
+        "powershell": 0.3939,
+        "sql": 0.4238
+      },
+      "T44": {
+        "bash": 0.6576,
+        "python": 0.5998,
+        "curl": 0.7262,
+        "powershell": 0.597,
+        "sql": 0.5886
+      },
+      "T45": {
+        "bash": 0.3634,
+        "python": 0.4857,
+        "curl": 0.5752,
+        "powershell": 0.5374,
+        "sql": 0.6613
+      },
+      "T46": {
+        "bash": 0.781,
+        "python": 0.6934,
+        "curl": 0.6358,
+        "powershell": 0.6009,
+        "sql": 0.7245
+      },
+      "T47": {
+        "bash": 0.5765,
+        "python": 0.6185,
+        "curl": 0.5293,
+        "powershell": 0.626,
+        "sql": 0.7678
+      },
+      "T48": {
+        "bash": 0.301,
+        "python": 0.5712,
+        "curl": 0.5931,
+        "powershell": 0.5528,
+        "sql": 0.5423
+      },
+      "T49": {
+        "bash": 0.4347,
+        "python": 0.4875,
+        "curl": 0.5569,
+        "powershell": 0.5644,
+        "sql": 0.7173
+      },
+      "T50": {
+        "bash": 0.7683,
+        "python": 0.5681,
+        "curl": 0.8524,
+        "powershell": 0.6075,
+        "sql": 0.6111
+      }
+    },
+    "codebert-base": {
+      "T01": {
+        "bash": 0.1323,
+        "python": 0.1408,
+        "curl": 0.163,
+        "powershell": 0.1628,
+        "sql": 0.1323
+      },
+      "T02": {
+        "bash": 0.1138,
+        "python": 0.0789,
+        "curl": 0.0624,
+        "powershell": 0.1029,
+        "sql": 0.2007
+      },
+      "T03": {
+        "bash": 0.0775,
+        "python": 0.0738,
+        "curl": 0.0557,
+        "powershell": 0.1161,
+        "sql": 0.0725
+      },
+      "T04": {
+        "bash": 0.0815,
+        "python": 0.1219,
+        "curl": 0.0816,
+        "powershell": 0.1959,
+        "sql": 0.1348
+      },
+      "T05": {
+        "bash": 0.2252,
+        "python": 0.1307,
+        "curl": 0.1209,
+        "powershell": 0.1414,
+        "sql": 0.1252
+      },
+      "T06": {
+        "bash": 0.1575,
+        "python": 0.1045,
+        "curl": 0.0876,
+        "powershell": 0.1294,
+        "sql": 0.1512
+      },
+      "T07": {
+        "bash": 0.0757,
+        "python": 0.0983,
+        "curl": 0.0784,
+        "powershell": 0.1008,
+        "sql": 0.2208
+      },
+      "T08": {
+        "bash": 0.3049,
+        "python": 0.2097,
+        "curl": 0.2045,
+        "powershell": 0.1896,
+        "sql": 0.2258
+      },
+      "T09": {
+        "bash": 0.0856,
+        "python": 0.0958,
+        "curl": 0.0561,
+        "powershell": 0.0584,
+        "sql": 0.1421
+      },
+      "T10": {
+        "bash": 0.1501,
+        "python": 0.1651,
+        "curl": 0.0639,
+        "powershell": 0.114,
+        "sql": 0.1742
+      },
+      "T11": {
+        "bash": 0.1301,
+        "python": 0.0901,
+        "curl": 0.1222,
+        "powershell": 0.0882,
+        "sql": 0.0639
+      },
+      "T12": {
+        "bash": 0.1359,
+        "python": 0.1407,
+        "curl": 0.0954,
+        "powershell": 0.1469,
+        "sql": 0.2493
+      },
+      "T13": {
+        "bash": 0.1991,
+        "python": 0.1032,
+        "curl": 0.0977,
+        "powershell": 0.1344,
+        "sql": 0.1023
+      },
+      "T14": {
+        "bash": 0.1187,
+        "python": 0.231,
+        "curl": 0.0819,
+        "powershell": 0.1098,
+        "sql": 0.2035
+      },
+      "T15": {
+        "bash": 0.1376,
+        "python": 0.0901,
+        "curl": 0.1997,
+        "powershell": 0.1346,
+        "sql": 0.0932
+      },
+      "T16": {
+        "bash": 0.1258,
+        "python": 0.1936,
+        "curl": 0.1077,
+        "powershell": 0.0945,
+        "sql": 0.1589
+      },
+      "T17": {
+        "bash": 0.1373,
+        "python": 0.1372,
+        "curl": 0.1386,
+        "powershell": 0.1185,
+        "sql": 0.1309
+      },
+      "T18": {
+        "bash": 0.0743,
+        "python": 0.0888,
+        "curl": 0.1038,
+        "powershell": 0.0687,
+        "sql": 0.1336
+      },
+      "T19": {
+        "bash": 0.0883,
+        "python": 0.1961,
+        "curl": 0.0835,
+        "powershell": 0.1337,
+        "sql": 0.147
+      },
+      "T20": {
+        "bash": 0.1215,
+        "python": 0.095,
+        "curl": 0.1277,
+        "powershell": 0.1245,
+        "sql": 0.1033
+      },
+      "T21": {
+        "bash": 0.0968,
+        "python": 0.1642,
+        "curl": 0.1528,
+        "powershell": 0.0916,
+        "sql": 0.2515
+      },
+      "T22": {
+        "bash": 0.0806,
+        "python": 0.1606,
+        "curl": 0.0945,
+        "powershell": 0.0982,
+        "sql": 0.1615
+      },
+      "T23": {
+        "bash": 0.1441,
+        "python": 0.0759,
+        "curl": 0.0934,
+        "powershell": 0.1093,
+        "sql": 0.1001
+      },
+      "T24": {
+        "bash": 0.0828,
+        "python": 0.1119,
+        "curl": 0.1965,
+        "powershell": 0.0823,
+        "sql": 0.1133
+      },
+      "T25": {
+        "bash": 0.0944,
+        "python": 0.0871,
+        "curl": 0.0983,
+        "powershell": 0.1085,
+        "sql": 0.1999
+      },
+      "T26": {
+        "bash": 0.131,
+        "python": 0.1584,
+        "curl": 0.1908,
+        "powershell": 0.1232,
+        "sql": 0.0863
+      },
+      "T27": {
+        "bash": 0.1077,
+        "python": 0.0953,
+        "curl": 0.0974,
+        "powershell": 0.1108,
+        "sql": 0.1199
+      },
+      "T28": {
+        "bash": 0.116,
+        "python": 0.2063,
+        "curl": 0.1612,
+        "powershell": 0.1053,
+        "sql": 0.1045
+      },
+      "T29": {
+        "bash": 0.1066,
+        "python": 0.1334,
+        "curl": 0.1321,
+        "powershell": 0.1492,
+        "sql": 0.1159
+      },
+      "T30": {
+        "bash": 0.0997,
+        "python": 0.0824,
+        "curl": 0.1142,
+        "powershell": 0.0849,
+        "sql": 0.1224
+      },
+      "T31": {
+        "bash": 0.1491,
+        "python": 0.2048,
+        "curl": 0.1089,
+        "powershell": 0.1286,
+        "sql": 0.1242
+      },
+      "T32": {
+        "bash": 0.0844,
+        "python": 0.1183,
+        "curl": 0.1426,
+        "powershell": 0.084,
+        "sql": 0.196
+      },
+      "T33": {
+        "bash": 0.1121,
+        "python": 0.1286,
+        "curl": 0.095,
+        "powershell": 0.1099,
+        "sql": 0.1896
+      },
+      "T34": {
+        "bash": 0.1141,
+        "python": 0.0816,
+        "curl": 0.0822,
+        "powershell": 0.0911,
+        "sql": 0.1005
+      },
+      "T35": {
+        "bash": 0.132,
+        "python": 0.1454,
+        "curl": 0.1179,
+        "powershell": 0.1242,
+        "sql": 0.1426
+      },
+      "T36": {
+        "bash": 0.1078,
+        "python": 0.1465,
+        "curl": 0.1101,
+        "powershell": 0.0991,
+        "sql": 0.0748
+      },
+      "T37": {
+        "bash": 0.1378,
+        "python": 0.0828,
+        "curl": 0.0874,
+        "powershell": 0.1339,
+        "sql": 0.1287
+      },
+      "T38": {
+        "bash": 0.124,
+        "python": 0.1268,
+        "curl": 0.1641,
+        "powershell": 0.1341,
+        "sql": 0.099
+      },
+      "T39": {
+        "bash": 0.1026,
+        "python": 0.1375,
+        "curl": 0.1033,
+        "powershell": 0.0984,
+        "sql": 0.1193
+      },
+      "T40": {
+        "bash": 0.0702,
+        "python": 0.0711,
+        "curl": 0.0679,
+        "powershell": 0.0862,
+        "sql": 0.2205
+      },
+      "T41": {
+        "bash": 0.1152,
+        "python": 0.1211,
+        "curl": 0.1004,
+        "powershell": 0.0856,
+        "sql": 0.1888
+      },
+      "T42": {
+        "bash": 0.1122,
+        "python": 0.0975,
+        "curl": 0.0928,
+        "powershell": 0.1598,
+        "sql": 0.1577
+      },
+      "T43": {
+        "bash": 0.1286,
+        "python": 0.1244,
+        "curl": 0.1022,
+        "powershell": 0.1192,
+        "sql": 0.1051
+      },
+      "T44": {
+        "bash": 0.1133,
+        "python": 0.1506,
+        "curl": 0.104,
+        "powershell": 0.1281,
+        "sql": 0.2284
+      },
+      "T45": {
+        "bash": 0.143,
+        "python": 0.0954,
+        "curl": 0.0654,
+        "powershell": 0.1244,
+        "sql": 0.1541
+      },
+      "T46": {
+        "bash": 0.1905,
+        "python": 0.0918,
+        "curl": 0.1527,
+        "powershell": 0.1984,
+        "sql": 0.1199
+      },
+      "T47": {
+        "bash": 0.0723,
+        "python": 0.1052,
+        "curl": 0.0703,
+        "powershell": 0.1247,
+        "sql": 0.0906
+      },
+      "T48": {
+        "bash": 0.1375,
+        "python": 0.2126,
+        "curl": 0.1031,
+        "powershell": 0.0924,
+        "sql": 0.1534
+      },
+      "T49": {
+        "bash": 0.0978,
+        "python": 0.1771,
+        "curl": 0.0677,
+        "powershell": 0.084,
+        "sql": 0.2148
+      },
+      "T50": {
+        "bash": 0.2784,
+        "python": 0.1806,
+        "curl": 0.2467,
+        "powershell": 0.2135,
+        "sql": 0.2377
+      }
+    }
+  },
+  "statistics": {
+    "all-MiniLM-L6-v2": {
+      "mean_code_dist": 0.5762408,
+      "std_code_dist": 0.13521209389459213,
+      "mean_nl_nl_dist": 0.8139670843494182,
+      "std_nl_nl_dist": 0.12953091969236938,
+      "evasion_delta": -0.23772628434941823,
+      "evaded": 250,
+      "total": 250,
+      "evasion_rate": 1.0,
+      "wilson_ci_95": [
+        0.9849,
+        1.0
+      ],
+      "t_statistic": 43.9086,
+      "p_value_ttest": 1.558623676712497e-119,
+      "per_form": {
+        "bash": {
+          "mean": 0.5388,
+          "std": 0.1378,
+          "evasion_rate": 1.0,
+          "complexity_rank": 1
+        },
+        "python": {
+          "mean": 0.5581,
+          "std": 0.1323,
+          "evasion_rate": 1.0,
+          "complexity_rank": 5
+        },
+        "curl": {
+          "mean": 0.6053,
+          "std": 0.1492,
+          "evasion_rate": 1.0,
+          "complexity_rank": 2
+        },
+        "powershell": {
+          "mean": 0.5859,
+          "std": 0.1301,
+          "evasion_rate": 1.0,
+          "complexity_rank": 4
+        },
+        "sql": {
+          "mean": 0.5931,
+          "std": 0.1131,
+          "evasion_rate": 1.0,
+          "complexity_rank": 3
+        }
+      },
+      "per_actual_lang_5th_form": {
+        "javascript": {
+          "mean": 0.599,
+          "evasion_rate": 1.0,
+          "n": 45
+        },
+        "sql": {
+          "mean": 0.5398,
+          "evasion_rate": 1.0,
+          "n": 5
+        }
+      }
+    },
+    "all-mpnet-base-v2": {
+      "mean_code_dist": 0.5618388000000001,
+      "std_code_dist": 0.13710971976690783,
+      "mean_nl_nl_dist": 0.8186133559382691,
+      "std_nl_nl_dist": 0.12937589007662856,
+      "evasion_delta": -0.25677455593826903,
+      "evaded": 250,
+      "total": 250,
+      "evasion_rate": 1.0,
+      "wilson_ci_95": [
+        0.9849,
+        1.0
+      ],
+      "t_statistic": 41.6434,
+      "p_value_ttest": 1.7242767356907277e-114,
+      "per_form": {
+        "bash": {
+          "mean": 0.5067,
+          "std": 0.1461,
+          "evasion_rate": 1.0,
+          "complexity_rank": 1
+        },
+        "python": {
+          "mean": 0.5413,
+          "std": 0.1116,
+          "evasion_rate": 1.0,
+          "complexity_rank": 5
+        },
+        "curl": {
+          "mean": 0.6008,
+          "std": 0.1551,
+          "evasion_rate": 1.0,
+          "complexity_rank": 2
+        },
+        "powershell": {
+          "mean": 0.5602,
+          "std": 0.131,
+          "evasion_rate": 1.0,
+          "complexity_rank": 4
+        },
+        "sql": {
+          "mean": 0.6002,
+          "std": 0.1119,
+          "evasion_rate": 1.0,
+          "complexity_rank": 3
+        }
+      },
+      "per_actual_lang_5th_form": {
+        "javascript": {
+          "mean": 0.6122,
+          "evasion_rate": 1.0,
+          "n": 45
+        },
+        "sql": {
+          "mean": 0.492,
+          "evasion_rate": 1.0,
+          "n": 5
+        }
+      }
+    },
+    "codebert-base": {
+      "mean_code_dist": 0.12679400000000002,
+      "std_code_dist": 0.04462891981663907,
+      "mean_nl_nl_dist": 0.0670575585170668,
+      "std_nl_nl_dist": 0.03839044997663835,
+      "evasion_delta": 0.05973644148293322,
+      "evaded": 21,
+      "total": 250,
+      "evasion_rate": 0.084,
+      "wilson_ci_95": [
+        0.0556,
+        0.125
+      ],
+      "t_statistic": -25.8839,
+      "p_value_ttest": 1.0,
+      "per_form": {
+        "bash": {
+          "mean": 0.1251,
+          "std": 0.0465,
+          "evasion_rate": 0.06,
+          "complexity_rank": 1
+        },
+        "python": {
+          "mean": 0.1292,
+          "std": 0.0424,
+          "evasion_rate": 0.1,
+          "complexity_rank": 5
+        },
+        "curl": {
+          "mean": 0.113,
+          "std": 0.0421,
+          "evasion_rate": 0.04,
+          "complexity_rank": 2
+        },
+        "powershell": {
+          "mean": 0.119,
+          "std": 0.0326,
+          "evasion_rate": 0.02,
+          "complexity_rank": 4
+        },
+        "sql": {
+          "mean": 0.1477,
+          "std": 0.0495,
+          "evasion_rate": 0.2,
+          "complexity_rank": 3
+        }
+      },
+      "per_actual_lang_5th_form": {
+        "javascript": {
+          "mean": 0.1523,
+          "evasion_rate": 0.2222,
+          "n": 45
+        },
+        "sql": {
+          "mean": 0.1063,
+          "evasion_rate": 0.0,
+          "n": 5
+        }
+      }
+    },
+    "cross_model": {
+      "compared": "all-MiniLM-L6-v2 vs codebert-base",
+      "mannwhitney_U": 62495.0,
+      "p_value": 1.185894984228983e-83,
+      "cohens_d": 4.464,
+      "interpretation": "large"
+    },
+    "complexity_gradient": {
+      "model": "codebert-base",
+      "spearman_rho": 0.3,
+      "p_value": 0.6238,
+      "interpretation": "CodeBERT is ROBUST to code complexity (p>0.05) \u2014 strengthens fix claim.",
+      "per_form_means": {
+        "bash": 0.1251,
+        "python": 0.1292,
+        "curl": 0.113,
+        "powershell": 0.119,
+        "sql": 0.1477
+      }
+    }
+  }
+}

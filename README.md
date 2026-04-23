@@ -7,6 +7,8 @@
 
 A memory-augmented, teacher-student safety pipeline for AI agents. Evaluates proposed agent actions through a 3-stage decision pipeline — semantic memory retrieval, a locally-trained neural classifier, and an LLM fallback — achieving F1=0.983 while reducing decision latency by 155x for repeated threats.
 
+**Primary finding:** Retrieval-based safety memory using general-purpose sentence embeddings is completely blind to code-form attacks. An attacker blocked by natural-language detection can rewrite the same threat in bash, Python, curl, PowerShell, or SQL and achieve a **100% evasion rate** across all 75 tested pairs. This failure persists even with a stronger general embedding (all-mpnet-base-v2). A code-specific model (CodeBERT) eliminates the gap entirely — but is not used by any current agent safety system.
+
 ---
 
 ## The Problem
@@ -59,10 +61,17 @@ Evaluated on 200 human-curated actions across 7 categories (safe, credential acc
 **Neural classifier standalone (validation, n=1,986):**
 Precision=0.9753 | Recall=0.9858 | **F1=0.9806**
 
-**Key finding — bash variant blind spot:**
-All 5 tested bash-form attacks exceeded the semantic memory detection threshold (avg distance=0.91) despite their natural-language equivalents scoring well below it (avg distance=0.75). Code-form text occupies a distinct region of the embedding space.
+**Code-form evasion analysis (15 threats × 5 code forms × 3 embedding models):**
 
-> **Note on API call counts:** The benchmark above is a cold-start evaluation — memory is empty and the NN has no prior context, so every action falls through to Claude. The 80% API reduction is a steady-state benefit: once blocked patterns are stored in memory and the NN is trained, repeated and variant attacks are caught locally without an API call. See Key Findings for the efficiency analysis.
+| Embedding Model | Type | Evasion Rate | Evaded / Total |
+|---|---|---|---|
+| all-MiniLM-L6-v2 | General NLP | **100%** | 75/75 |
+| all-mpnet-base-v2 | General NLP (stronger) | **100%** | 75/75 |
+| microsoft/codebert-base | Code-specific | **0%** | 0/75 |
+
+All 5 code forms (bash, Python, curl, PowerShell, SQL) achieve 100% evasion against both general-purpose models. The semantic gap between natural language and code is systematic, not form-specific. CodeBERT eliminates the vulnerability but is not currently deployed in agent safety pipelines.
+
+> **Note on API call counts:** The benchmark above is a cold-start evaluation — memory is empty and the NN has no prior context, so every action falls through to Claude. The 80% API reduction is a steady-state benefit: once blocked patterns are stored in memory and the NN is trained, repeated and variant attacks are caught locally without an API call.
 
 ![Precision-Recall Curve](figures/precision_recall.png)
 
@@ -95,7 +104,10 @@ adaptive-guardrails/
 ├── figures/
 │   ├── tsne_embeddings.png
 │   ├── precision_recall.png
-│   └── bash_variant_analysis.txt
+│   ├── bash_variant_analysis.txt
+│   ├── code_form_analysis.py     # Multi-form × multi-model evasion analysis
+│   ├── code_form_distances.txt   # Human-readable distance matrix (15×5×3)
+│   └── code_form_distances.json  # Machine-readable results
 └── tests/
     ├── test_memory.py     # 11 ChromaDB tests
     ├── test_validator.py  # 9 orchestration tests
@@ -160,6 +172,11 @@ python eval.py
 python figures/generate_all.py
 ```
 
+### Run code-form evasion analysis (no API calls, ~2 min local)
+```bash
+python figures/code_form_analysis.py
+```
+
 ### Run tests
 ```bash
 pytest tests/
@@ -188,22 +205,42 @@ A safety system should never fail open. If the API is unavailable, the worst out
 
 ## Key Findings
 
+**Primary contribution — characterisation of code-form evasion:**
+
+Retrieval-based safety memory assumes semantically similar threats produce similar embeddings. We show this assumption breaks completely for code-form attacks. Across 15 threat scenarios, 5 code forms, and 2 general-purpose embedding models, every single code-form variant (75/75) evades memory detection. The attacker simply rewrites the blocked natural-language threat as a shell command or script.
+
+Critically, this failure mode is invisible to system designers: the pipeline appears to be working (blocking natural-language threats), while code-form equivalents pass through unchallenged.
+
+**Other findings:**
+
 1. **Rules-based systems are insufficient:** F1 jumps from 0.706 → 0.983 by replacing keyword matching with LLM-based semantic evaluation.
 
 2. **Teacher-student learning works:** The NN trained on Claude's labels achieves F1=0.9806, within 0.3% of Claude's own F1=0.9835.
 
 3. **Semantic memory adds speed without accuracy loss:** Memory-cached decisions take ~10ms vs ~1550ms for API calls with identical accuracy.
 
-4. **Bash variants evade embedding-based detection:** 5/5 code-form attacks exceeded the cosine distance threshold. Retrieval-based safety requires code-aware embedding strategies.
+4. **CodeBERT eliminates the evasion gap:** Switching to a code-specific embedding model reduces evasion from 100% to 0% — but no current agent safety pipeline uses code-specific embeddings at the retrieval layer.
 
 5. **Cost at scale:** LLM-only costs ~$300/day at 1M decisions. A system handling 80% locally via NN costs ~$60/day — 80% operational cost reduction.
+
+---
+
+## Related Work
+
+**CodeAttack (ACL 2024)** — Ren et al. show that encoding natural-language harmful prompts as code bypasses LLM safety alignment. Our finding is complementary but distinct: CodeAttack targets the *LLM's own safety training*, while we show code-form attacks bypass the *retrieval memory layer* before the LLM is ever reached. The attack surfaces are different, and the fix is different (embedding model choice vs. LLM fine-tuning).
+
+**AGrail (ACL 2025)** — A memory-augmented agent guardrail that stores past violations and blocks similar future actions via retrieval. Our work characterises a failure mode of exactly this class of system: the retrieval step is blind to code-form rewrites of stored threats.
+
+**GuardAgent (ICML 2025)** — An LLM-based guard agent that evaluates actions against user-defined safety policies. GuardAgent addresses what to block (policy reasoning); our work addresses whether code-form attacks can bypass the retrieval step that precedes policy evaluation.
+
+**Sentence-BERT (Reimers & Gurevych, EMNLP 2019)** and **CodeBERT (Feng et al., EMNLP 2020)** — Our analysis exploits the known difference in embedding geometry between general-purpose NLP models and code-specific models. The practical implication for agent safety is that model choice at the retrieval layer determines attack surface.
 
 ---
 
 ## Limitations
 
 - Benchmark has 200 samples — larger evaluation needed for production claims
-- Code-form variants (bash, Python, curl) evade semantic memory detection
+- Code-form variants (bash, Python, curl, PowerShell, SQL) achieve 100% evasion against general-purpose embeddings — mitigated by switching to CodeBERT
 - NN thresholds (0.85/0.15) require manual tuning per deployment context
 - No evaluation on multi-step compound actions or social engineering
 - Memory hit rate is low on novel/unique actions — benefit grows with repeated attack patterns
