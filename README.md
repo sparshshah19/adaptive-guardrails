@@ -42,14 +42,14 @@ Incoming action
 
 ## Results
 
-Evaluated on 198 human-curated actions across 7 categories (safe, credential access, file operations, network exfiltration, privilege escalation, ambiguous, semantic variants).
+Evaluated on 200 human-curated actions across 7 categories (safe, credential access, file operations, network exfiltration, privilege escalation, ambiguous, semantic variants).
 
 | System | Precision | Recall | F1 | API Calls | Avg Latency |
 |---|---|---|---|---|---|
 | 1. Rules/Regex baseline | 0.9851 | 0.5500 | 0.7059 | 0 | ~0ms |
-| 2. LLM-only (Claude Haiku) | 0.9754 | 0.9917 | 0.9835 | 198 | 1549ms |
-| 3. Memory + LLM | 0.9915 | 0.9750 | 0.9832 | 198 | 1566ms |
-| 4. Full system (ours) | 0.9833 | 0.9833 | 0.9833 | 198 | 1586ms |
+| 2. LLM-only (Claude Haiku) | 0.9754 | 0.9917 | 0.9835 | 200 | 1549ms |
+| 3. Memory + LLM | 0.9915 | 0.9750 | 0.9832 | 200 | 1566ms |
+| 4. Full system (ours) | 0.9833 | 0.9833 | 0.9833 | 200 | 1586ms |
 
 **Neural classifier standalone (validation, n=1,986):**
 Precision=0.9753 | Recall=0.9858 | **F1=0.9806**
@@ -78,7 +78,7 @@ adaptive-guardrails/
 ├── agent.py               # Test action sets across 4 categories
 ├── main.py                # CLI runner
 ├── benchmark/
-│   ├── dataset.json       # 198 human-curated labelled actions
+│   ├── dataset.json       # 200 human-curated labelled actions
 │   ├── rules_baseline.py  # Keyword/regex System 1
 │   └── run_benchmark.py   # 4-system comparison runner
 ├── figures/
@@ -191,7 +191,7 @@ A safety system should never fail open. If the API is unavailable, the worst out
 
 ## Limitations
 
-- Benchmark has 198 samples — larger evaluation needed for production claims
+- Benchmark has 200 samples — larger evaluation needed for production claims
 - Code-form variants (bash, Python, curl) evade semantic memory detection
 - NN thresholds (0.85/0.15) require manual tuning per deployment context
 - No evaluation on multi-step compound actions or social engineering
