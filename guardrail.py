@@ -19,7 +19,7 @@ from models import GuardrailResult
 
 load_dotenv()
 
-client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
 
 # Conservative posture: when uncertain, block.
 # False negatives (missing a real threat) are worse than false positives
