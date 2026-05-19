@@ -601,10 +601,63 @@ def embed_codebert(texts: list) -> np.ndarray:
     return np.vstack(all_vecs)
 
 
+def embed_gemini(texts: list) -> np.ndarray:
+    from google import genai
+    from google.genai import types
+    import os, time
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    all_vecs = []
+    batch_size = 20  # smaller batches to stay within free-tier rate limits
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        for attempt in range(5):
+            try:
+                result = client.models.embed_content(
+                    model="gemini-embedding-001",
+                    contents=batch,
+                    config=types.EmbedContentConfig(task_type="SEMANTIC_SIMILARITY"),
+                )
+                all_vecs.extend([e.values for e in result.embeddings])
+                time.sleep(1.5)  # stay within 100 req/min free tier
+                break
+            except Exception as e:
+                if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                    wait = 10 * (attempt + 1)
+                    print(f"\n  Gemini rate limit — waiting {wait}s …", flush=True)
+                    time.sleep(wait)
+                else:
+                    raise
+    vecs = np.array(all_vecs, dtype=np.float32)
+    vecs = vecs / (np.linalg.norm(vecs, axis=1, keepdims=True) + 1e-10)
+    return vecs
+
+
+def embed_cohere(texts: list) -> np.ndarray:
+    import cohere
+    import os
+    co = cohere.ClientV2(api_key=os.environ["COHERE_API_KEY"])
+    all_vecs = []
+    batch_size = 96
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        response = co.embed(
+            texts=batch,
+            model="embed-english-v3.0",
+            input_type="search_query",
+            embedding_types=["float"],
+        )
+        all_vecs.extend(response.embeddings.float)
+    vecs = np.array(all_vecs, dtype=np.float32)
+    vecs = vecs / (np.linalg.norm(vecs, axis=1, keepdims=True) + 1e-10)
+    return vecs
+
+
 MODELS = [
-    ("all-MiniLM-L6-v2",  embed_minilm),
-    ("all-mpnet-base-v2", embed_mpnet),
-    ("codebert-base",     embed_codebert),
+    ("all-MiniLM-L6-v2",       embed_minilm),
+    ("all-mpnet-base-v2",      embed_mpnet),
+    ("codebert-base",          embed_codebert),
+    ("gemini-embedding-001",      embed_gemini),
+    ("cohere-embed-english-v3",   embed_cohere),
 ]
 
 
