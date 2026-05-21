@@ -7,7 +7,7 @@
 
 A memory-augmented, teacher-student safety pipeline for AI agents. Evaluates proposed agent actions through a 3-stage decision pipeline — semantic memory retrieval, a locally-trained neural classifier, and an LLM fallback — achieving F1=0.983 while reducing decision latency by 155x for repeated threats.
 
-**Primary finding:** Retrieval-based safety memory using general-purpose sentence embeddings is completely blind to code-form attacks. An attacker blocked by natural-language detection can rewrite the same threat in bash, Python, curl, PowerShell, or SQL and achieve a **100% evasion rate** across all 75 tested pairs. This failure persists even with a stronger general embedding (all-mpnet-base-v2). A code-specific model (CodeBERT) eliminates the gap entirely — but is not used by any current agent safety system.
+**Primary finding:** Retrieval-based safety memory using general-purpose sentence embeddings is completely blind to code-form attacks. An attacker blocked by natural-language detection can rewrite the same threat in bash, Python, curl, PowerShell, or SQL and achieve a **100% evasion rate** against all general-purpose models tested — including a large commercial embedding (Cohere embed-english-v3). Code-aware models dramatically reduce this gap: CodeBERT drops evasion to **8.4%** and Gemini embedding-001 to **1.2%** — but no current agent safety pipeline uses code-aware embeddings at the retrieval layer.
 
 ---
 
@@ -61,21 +61,29 @@ Evaluated on 200 human-curated actions across 7 categories (safe, credential acc
 **Neural classifier standalone (validation, n=1,986):**
 Precision=0.9753 | Recall=0.9858 | **F1=0.9806**
 
-**Code-form evasion analysis (15 threats × 5 code forms × 3 embedding models):**
+**Code-form evasion analysis (50 threats × 5 code forms × 5 embedding models, n=250 per model):**
 
 | Embedding Model | Type | Evasion Rate | Evaded / Total |
 |---|---|---|---|
-| all-MiniLM-L6-v2 | General NLP | **100%** | 75/75 |
-| all-mpnet-base-v2 | General NLP (stronger) | **100%** | 75/75 |
-| microsoft/codebert-base | Code-specific | **0%** | 0/75 |
+| all-MiniLM-L6-v2 | General NLP | **100%** | 250/250 |
+| all-mpnet-base-v2 | General NLP (larger) | **100%** | 250/250 |
+| Cohere embed-english-v3 | General NLP (commercial) | **100%** | 250/250 |
+| microsoft/codebert-base | Code-aware | **8.4%** | 21/250 |
+| Gemini embedding-001 | Code-aware (commercial) | **1.2%** | 3/250 |
 
-All 5 code forms (bash, Python, curl, PowerShell, SQL) achieve 100% evasion against both general-purpose models. The semantic gap between natural language and code is systematic, not form-specific. CodeBERT eliminates the vulnerability but is not currently deployed in agent safety pipelines.
+All 5 code forms achieve 100% evasion against every general-purpose model — including a large commercial embedding. The failure is driven by training data composition, not model size: models trained on natural language only cannot bridge the NL→code semantic gap regardless of scale. Code-aware models (trained on code+NL) reduce evasion to near-zero but are not currently deployed in agent safety pipelines.
+
+![Evasion Rate by Embedding Model](figures/fig1_evasion_comparison.png)
+
+![Residual Evasion per Code Form (code-aware models)](figures/fig2_per_form_codebert.png)
 
 > **Note on API call counts:** The benchmark above is a cold-start evaluation — memory is empty and the NN has no prior context, so every action falls through to Claude. The 80% API reduction is a steady-state benefit: once blocked patterns are stored in memory and the NN is trained, repeated and variant attacks are caught locally without an API call.
 
-![Precision-Recall Curve](figures/precision_recall.png)
+![NL→Code Distance vs NL→NL Baseline](figures/fig3_distance_distribution.png)
 
-![Embedding Space (t-SNE)](figures/tsne_embeddings.png)
+![4-System Benchmark](figures/fig4_benchmark.png)
+
+![t-SNE: MiniLM vs CodeBERT Embedding Space](figures/tsne_semantic_gap_comparison.png)
 
 ---
 
@@ -102,12 +110,20 @@ adaptive-guardrails/
 │   ├── rules_baseline.py  # Keyword/regex System 1
 │   └── run_benchmark.py   # 4-system comparison runner
 ├── figures/
-│   ├── tsne_embeddings.png
+│   ├── code_form_analysis.py          # 5-model × 5-form evasion analysis (250 pairs each)
+│   ├── generate_paper_figures.py      # Generates fig1–fig4 from results
+│   ├── code_form_distances.json       # Machine-readable results (5 models × 250 pairs)
+│   ├── code_form_distances.txt        # Human-readable distance matrix
+│   ├── bash_variant_analysis.txt      # Early single-form analysis
+│   ├── fig1_evasion_comparison.png    # Evasion rate by model (horizontal bar)
+│   ├── fig2_per_form_codebert.png     # Per-code-form breakdown (CodeBERT vs Gemini)
+│   ├── fig3_distance_distribution.png # NL→code vs NL→NL distance per model
+│   ├── fig4_benchmark.png             # 4-system precision/recall/F1
+│   ├── tsne_semantic_gap_comparison.png  # MiniLM vs CodeBERT embedding geometry
+│   ├── tsne_semantic_gap_minilm.png
+│   ├── tsne_semantic_gap_codebert.png
 │   ├── precision_recall.png
-│   ├── bash_variant_analysis.txt
-│   ├── code_form_analysis.py     # Multi-form × multi-model evasion analysis
-│   ├── code_form_distances.txt   # Human-readable distance matrix (15×5×3)
-│   └── code_form_distances.json  # Machine-readable results
+│   └── tsne_embeddings.png
 └── tests/
     ├── test_memory.py     # 11 ChromaDB tests
     ├── test_validator.py  # 9 orchestration tests
@@ -169,10 +185,10 @@ python eval.py
 
 ### Generate paper figures
 ```bash
-python figures/generate_all.py
+python figures/generate_paper_figures.py
 ```
 
-### Run code-form evasion analysis (no API calls, ~2 min local)
+### Run code-form evasion analysis (requires GEMINI_API_KEY + COHERE_API_KEY, ~5 min)
 ```bash
 python figures/code_form_analysis.py
 ```
@@ -219,7 +235,7 @@ Critically, this failure mode is invisible to system designers: the pipeline app
 
 3. **Semantic memory adds speed without accuracy loss:** Memory-cached decisions take ~10ms vs ~1550ms for API calls with identical accuracy.
 
-4. **CodeBERT eliminates the evasion gap:** Switching to a code-specific embedding model reduces evasion from 100% to 0% — but no current agent safety pipeline uses code-specific embeddings at the retrieval layer.
+4. **Training data composition determines evasion rate:** General-purpose models (MiniLM, mpnet, Cohere) all hit 100% evasion regardless of size or provenance. Code-aware models collapse the gap: CodeBERT → 8.4%, Gemini embedding-001 → 1.2%. No current agent safety pipeline uses code-aware embeddings at the retrieval layer.
 
 5. **Cost at scale:** LLM-only costs ~$300/day at 1M decisions. A system handling 80% locally via NN costs ~$60/day — 80% operational cost reduction.
 
@@ -240,7 +256,7 @@ Critically, this failure mode is invisible to system designers: the pipeline app
 ## Limitations
 
 - Benchmark has 200 samples — larger evaluation needed for production claims
-- Code-form variants (bash, Python, curl, PowerShell, SQL) achieve 100% evasion against general-purpose embeddings — mitigated by switching to CodeBERT
+- Code-form variants achieve 100% evasion against all general-purpose embeddings tested (including commercial); mitigated by code-aware models (CodeBERT 8.4%, Gemini 1.2%), but residual evasion remains
 - NN thresholds (0.85/0.15) require manual tuning per deployment context
 - No evaluation on multi-step compound actions or social engineering
 - Memory hit rate is low on novel/unique actions — benefit grows with repeated attack patterns
